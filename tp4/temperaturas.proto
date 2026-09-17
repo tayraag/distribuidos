@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// Servicio para consultar las últimas temperaturas de una ciudad.
+service ServicioTemperaturas {
+  rpc ObtenerUltimasTemperaturas (CodigoCiudad) returns (RespuestaTemperaturas);
+}
+
+// Código de la ciudad a consultar, por ejemplo: "CBA", "MDZ", "ROS".
+message CodigoCiudad {
+  string codigo = 1;
+}
+
+// Una medición individual de temperatura.
+message Temperatura {
+  double valor = 1;      // Temperatura en grados Celsius.
+  int64 timestamp = 2;   // UNIX timestamp (segundos desde 1970).
+}
+
+// Lista con hasta 5 lecturas, ordenadas desde la más reciente a la más antigua.
+message RespuestaTemperaturas {
+  repeated Temperatura temperaturas = 1;
+}
+
